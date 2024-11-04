@@ -5,6 +5,7 @@ import Login from '../components/Login.vue'
 import Details from '../components/Details.vue'
 import Register from "../components/Register.vue";
 import Search from "../components/SearchResult.vue";
+import UserInfo from "../components/UserInfo.vue";
 
 Vue.use(Router)
 
@@ -49,6 +50,14 @@ export default new Router({
       component: Search,
       meta: {
         is_store: true
+      }
+    },
+    {
+      path: '/UserInfo',
+      name: 'UserInfo',
+      component: UserInfo,
+      meta: {
+        is_store: false
       }
     }
   ]

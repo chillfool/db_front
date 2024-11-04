@@ -5,11 +5,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: false
+    isLoggedIn: true,
+    userName: "user1"
   },
   mutations: {
-    setIsLoggedIn(state, payload) {
-      state.isLoggedIn = payload;
+    setIsLoggedIn(state,data) {
+      state.isLoggedIn = false;
+    }
+  },
+  actions: {
+    setLogin({commit},data) {
+      commit('setIsLoggedIn',data)
     }
   }
 })

@@ -1,24 +1,34 @@
 <template>
   <div>
     <div class="header" v-show="$route.meta.is_store">
-      <div class="box">
-        <h1>
-          <img src="../static/yln.png" alt="404" width="56" height="45" />
-        </h1>
-        <nav class="title">App Store</nav>
-        <nav class="tag">
-          <router-link to="/">商店首页</router-link>
-        </nav>
+      <div class="header-left">
+        <div class="box">
+          <h1>
+            <img src="../static/yln.png" alt="404" width="56" height="45" />
+          </h1>
+          <nav class="title">App Store</nav>
+        </div>
       </div>
-      <div class="box">
-        <input class="text" type="text" v-model="keyword" @keyup.enter="search" placeholder="请输入你想要的商品">
-        <button class="button" @click="search">搜索</button>
-        <nav class="tag">
+      <div class="header-center">
+        <div class="search-container">
+          <input class="text" type="text" v-model="keyword" @keyup.enter="search" placeholder="请输入你想要的商品">
+          <button class="button" @click="search">搜索</button>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav class="tag" v-if="!isLoggedIn">
           <router-link to="/Login">Login</router-link>
         </nav>
-        <nav class="tag">
+        <nav class="tag" v-if="!isLoggedIn">
           <router-link to="/Register">Register</router-link>
         </nav>
+        <div class="user-info" v-if="isLoggedIn">
+          <router-link :to="'/UserInfo'" class="user-name-link">
+            <div class="user-name-circle">
+              {{ userName }}
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
     <div>
@@ -29,15 +39,22 @@
 
 <script>
 import axios from "axios";
+import { mapState } from 'vuex';
+
 export default {
   name: 'App',
   data () {
     return {
       keyword: '',
       softwares: [],
-      mods: [],
-      isLogin: false
+      mods: []
     }
+  },
+  computed: {
+    ...mapState({
+      isLoggedIn: state => state.isLoggedIn,
+      userName: state => state.userName
+    })
   },
   methods: {
     async search () {
@@ -59,74 +76,130 @@ export default {
 </script>
 
 <style>
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ecf0f1, #bdc3c7);
+  color: powderblue;
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px; /* 稍微增加高度以容纳更多内容 */
-  background-color: #ffcccb; /* 更改为柔和的粉色 */
-  padding: 0 20px; /* 增加内边距以提供更多空间 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影以增加深度 */
+  height: 80px;
+  background: linear-gradient(to right, lightskyblue,lightblue);
+  padding: 0 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-left, .header-center, .header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .box {
   display: flex;
   align-items: center;
-  gap: 10px; /* 使用gap属性增加子元素之间的间距 */
+  gap: 20px;
 }
 
 .tag {
-  color: #333; /* 更改为深色以提高可读性 */
-  background-color: #ffe4e1; /* 添加背景色以突出显示 */
-  padding: 5px 20px; /* 增加内边距以提供更好的点击区域 */
-  border-radius: 25px; /* 使用更大的圆角 */
-  transition: background-color 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
+  color: #fff;
+  background: linear-gradient(to right, #8e44ad, lavender);
+  padding: 8px 24px;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tag:hover {
-  background-color: #ff9999; /* 悬停时更改背景色 */
-  color: #fff; /* 悬停时更改文本色 */
+  background: linear-gradient(to right, lavender, #8e44ad);
+  color: #ecf0f1;
 }
 
 .title {
-  color: lightskyblue; /* 更改为深色以提高可读性 */
-  font-size: 18px; /* 增加字体大小 */
-  font-weight: bold; /* 加粗字体以突出显示 */
-  padding: 0 10px; /* 调整内边距以与图像保持平衡 */
+  color: lightyellow;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0;
 }
 
 .text {
-  height: 30px; /* 调整高度以匹配其他元素 */
-  font-size: 16px; /* 增加字体大小 */
-  border: 1px solid #ff9999; /* 更改边框色以与主题相匹配 */
-  padding: 5px 20px; /* 增加内边距以提供更好的输入体验 */
-  border-radius: 25px; /* 使用更大的圆角 */
+  height: 40px;
+  font-size: 18px;
+  border: 2px mediumpurple;
+  padding: 10px 24px;
+  border-radius: 30px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  width: 500px;
 }
 
 .button {
-  width: 80px; /* 增加宽度以提供更好的点击体验 */
-  height: 35px; /* 增加高度以匹配其他元素 */
-  font-size: 16px; /* 增加字体大小 */
-  margin-left: 10px; /* 更改边距以与其他元素保持平衡 */
-  border: none; /* 移除边框以使用背景色填充 */
-  background-color: #ff9999; /* 更改背景色以与主题相匹配 */
-  color: #fff; /* 设置文本色为白色以提高可读性 */
-  border-radius: 25px; /* 使用更大的圆角 */
-  cursor: pointer; /* 添加鼠标悬停时的指针样式 */
-  transition: background-color 0.3s ease; /* 添加过渡效果 */
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  background: linear-gradient(to right, #8e44ad, lavender);
+  color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  padding: 0 20px;
 }
 
 .button:hover {
-  background-color: #ff6666; /* 悬停时更改背景色 */
+  background: linear-gradient(to right, lavender, #9b59b6);
+  transform: scale(1.05);
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-name-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #8e44ad,lavender);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+}
+
+.user-name-circle:hover {
+  background: linear-gradient(to right, lavender, #9b59b6);
+  color: #fff;
+  transform: scale(1.05);
+}
+
 
 .router-link-exact-active, .router-link-active {
   text-decoration: none;
-  color: #ff6666; /* 更改活动链接的文本色 */
+  color: lavender;
 }
 
 a {
   text-decoration: none;
-  color: inherit; /* 继承父元素的文本色 */
+  color: inherit;
 }
+
 </style>
