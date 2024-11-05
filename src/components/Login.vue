@@ -1,3 +1,4 @@
+<!-- 更改过-->
 <template>
   <div class="login-container">
     <h2>登录</h2>
@@ -49,9 +50,10 @@ export default {
           //     'usertype': 'admin',
           //     'userID': '1'
           //   })
-         
+          this.$store.dispatch('setLogin',true);
+          this.$store.dispatch('setUserName',this.username);
           // 登录成功，跳转到 Home 页面
-          this.$router.push('/about');
+          this.$router.push('/');
         } else {
           // 登录失败，显示错误信息
           alert('登录失败，请检查用户名和密码，您正在登陆的账号为'+ this.username);
@@ -60,6 +62,9 @@ export default {
         console.error('登录请求失败:', error);
       }
     },
+    change() {
+      this.$store.dispatch('setLogin',true);
+    }
   },
 };
 </script>

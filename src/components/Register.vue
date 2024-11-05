@@ -1,3 +1,4 @@
+<!-- 更改过-->
 <template>  
     <div class="register-container">  
       <h2>注册</h2>  
@@ -48,9 +49,9 @@
           // 根据后端返回的响应处理注册成功的情况  
           // 比如可以跳转到登录页面或者显示一个成功消息  
           alert('注册成功!');  
-          this.username = '';  
-          this.password = '';
-          this.$router.push('/about');  
+          this.$store.dispatch('setLogin',true);
+          this.$store.dispatch('setUserName',this.username);
+          this.$router.push('/');  
         } catch (error) {  
           // 处理错误，比如后端返回的错误信息  
           if (error.response && error.response.data && error.response.data.message) {  
