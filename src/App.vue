@@ -80,8 +80,9 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #ecf0f1, #bdc3c7);
-  color: powderblue;
+  background: url('../static/wallhaven-2yll2g_2560x1600.png') no-repeat center center fixed;
+  background-size: cover;
+  color: black;
 }
 
 .header {
@@ -92,6 +93,8 @@ body, html {
   background: linear-gradient(to right, lightskyblue,lightblue);
   padding: 0 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 .header-left, .header-center, .header-right {
