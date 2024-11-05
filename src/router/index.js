@@ -7,6 +7,7 @@ import Register from "../components/Register.vue";
 import Search from "../components/SearchResult.vue";
 import UserInfo from "../components/UserInfo.vue";
 import uploadModButton from "../components/uploadModButton.vue";
+import InfoList from "../components/InfoList.vue";
 
 Vue.use(Router)
 
@@ -65,6 +66,14 @@ export default new Router({
       path: '/uploadModButton',
       name:'uploadModButton',
       component: uploadModButton,
+      meta: {
+        is_store: false
+      }
+    },
+    {
+      path: '/InfoList',
+      name:'InfoList',
+      component: InfoList,
       meta: {
         is_store: false
       }

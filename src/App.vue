@@ -23,10 +23,15 @@
           <router-link to="/Register">Register</router-link>
         </nav>
         <div class="user-info" v-if="isLoggedIn">
-          <router-link :to="'/UserInfo'" class="user-name-link">
+          <router-link to="/UserInfo" class="user-name-link">
             <div class="user-name-circle">
               {{ userName }}
             </div>
+          </router-link>
+        </div>
+        <div v-if="isLoggedIn">
+          <router-link to="/InfoList">
+            <img src="../static/97cf2c84dcd73597bd1ee677ee89df6.png" alt="infoList"/>
           </router-link>
         </div>
       </div>
@@ -53,7 +58,8 @@ export default {
   computed: {
     ...mapState({
       isLoggedIn: state => state.isLoggedIn,
-      userName: state => state.userName
+      userName: state => state.userName,
+      userId: state => state.userId
     })
   },
   methods: {
