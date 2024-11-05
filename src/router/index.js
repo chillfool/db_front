@@ -7,7 +7,7 @@ import Register from "../components/Register.vue";
 import Search from "../components/SearchResult.vue";
 import UserInfo from "../components/UserInfo.vue";
 import uploadModButton from "../components/uploadModButton.vue";
-import InfoList from "../components/InfoList.vue";
+import InfoList from "../components/MessageListPage.vue";
 
 Vue.use(Router)
 
@@ -71,8 +71,8 @@ export default new Router({
       }
     },
     {
-      path: '/InfoList',
-      name:'InfoList',
+      path: '/MessageListPage',
+      name:'MessageListPage',
       component: InfoList,
       meta: {
         is_store: false

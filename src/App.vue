@@ -29,9 +29,9 @@
             </div>
           </router-link>
         </div>
-        <div v-if="isLoggedIn">
-          <router-link to="/InfoList">
-            <img src="../static/97cf2c84dcd73597bd1ee677ee89df6.png" alt="infoList"/>
+        <div v-if="isLoggedIn" class="user-info">
+          <router-link to="/MessageListPage">
+            <img src="../static/927260acae7e343f8b2c893039c0df2.png" alt="infoList" class="user-info-img"/>
           </router-link>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     async search () {
-      await axios.get('http://localhost:8080/api/user/search',{
+      await axios.get('http://localhost:8080/api/user/search/',{
         params: {
           keyword: this.keyword
         }
@@ -81,7 +81,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 body, html {
   margin: 0;
   padding: 0;
@@ -181,10 +181,10 @@ body, html {
 }
 
 .user-name-circle {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(to right, #8e44ad,lavender);
+  width: 150px;
+  height: 50px;
+  border-radius: 25px; /* 增加圆角 */
+  background: linear-gradient(to right, #8e44ad, lavender);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,6 +192,33 @@ body, html {
   color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+/* 图片边框和动画 */
+.user-info img {
+  height: 40px; /* 调整高度 */
+  width: 40px;  /* 调整宽度 */
+  margin-left: 10px;
+  border: 2px solid lavender; /* 添加边框 */
+  border-radius: 50%; /* 圆形边框 */
+  animation: pulse 1.5s infinite; /* 添加动画 */
+}
+
+/* 动画定义 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .user-name-circle:hover {
