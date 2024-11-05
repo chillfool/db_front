@@ -30,6 +30,11 @@
           </router-link>
         </div>
         <div v-if="isLoggedIn" class="user-info">
+          <router-link to="/Library">
+            <div class="library-circle">库</div>
+          </router-link>
+        </div>
+        <div v-if="isLoggedIn" class="user-info">
           <router-link to="/MessageListPage">
             <img src="../static/927260acae7e343f8b2c893039c0df2.png" alt="infoList" class="user-info-img"/>
           </router-link>
@@ -227,6 +232,30 @@ body, html {
   transform: scale(1.05);
 }
 
+.library-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #8e44ad, lavender);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 15px;
+}
+
+/* 当鼠标悬停在库按钮上时，改变背景色和缩放比例 */
+.library-circle:hover {
+  background: linear-gradient(to right, lavender, #9b59b6);
+  transform: scale(1.05);
+}
 
 .router-link-exact-active, .router-link-active {
   text-decoration: none;

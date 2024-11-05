@@ -39,9 +39,9 @@ export default {
       this.isMessageDialogVisible = true;
     },
     async deleteMessage (index) {
-      await axios.post('http://localhost:8080/api/message/query/',{
-        userid: this.userid,
-        messageId: this.messages[index]
+      await axios.post('http://localhost:8080/api/message/delete',{
+        uid: this.userid,
+        mid: this.messages[index]
       })
       this.messages.splice(index, 1);
     },
@@ -50,7 +50,7 @@ export default {
       this.currentMessage = null;
     },
     async loadUserInfo () {
-      await axios.get('http://localhost:8080/api/message/query/',{
+      await axios.get('http://localhost:8080/api/message/query',{
         params: {
           id: this.userid
         }

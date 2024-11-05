@@ -8,7 +8,8 @@ import Search from "../components/SearchResult.vue";
 import UserInfo from "../components/UserInfo.vue";
 import uploadModButton from "../components/uploadModButton.vue";
 import InfoList from "../components/MessageListPage.vue";
-
+import Library from "../components/Library.vue";
+import DownLoad from "../components/DownLoad.vue";
 Vue.use(Router)
 
 export default new Router({
@@ -74,6 +75,24 @@ export default new Router({
       path: '/MessageListPage',
       name:'MessageListPage',
       component: InfoList,
+      meta: {
+        is_store: false
+      }
+    },
+    {
+      path: '/Library',
+      name:'Library',
+      component: Library,
+      children: [
+        {
+          path: '/DownLoad:id',
+          name:'DownLoad',
+          component: DownLoad,
+          meta: {
+            is_store: false
+          }
+        }
+      ],
       meta: {
         is_store: false
       }
