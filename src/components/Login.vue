@@ -29,7 +29,7 @@ export default {
     async login() {
       try {
         const response = await fetch('http://localhost:8080/api/login', {
-          
+
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -43,13 +43,9 @@ export default {
         if (response.ok) {
           //将response内容打印到控制台上
           console.log(response);
+          this.$store.dispatch('setuid',response.body.id);
+          this.$store.dispatch('setType',response.body.type);
           this.success = true;
-          // 登录成功，保存用户名到 Vuex store
-          // this.$store.commit('changeUser', {
-          //     'username': this.username,
-          //     'usertype': 'admin',
-          //     'userID': '1'
-          //   })
           this.$store.dispatch('setLogin',true);
           this.$store.dispatch('setUserName',this.username);
           // 登录成功，跳转到 Home 页面
